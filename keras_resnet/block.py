@@ -39,12 +39,12 @@ def basic(filters, strides=(1, 1), first=False):
 
         y = keras.layers.Conv2D(filters, (3, 3), strides=strides, padding="same", **parameters)(x)
 
-        y = keras.layers.BatchNormalization(axis=axis)(y)
+        #y = keras.layers.BatchNormalization(axis=axis)(y)
         y = keras.layers.Activation("relu")(y)
 
         y = keras.layers.Conv2D(filters, (3, 3), padding="same", **parameters)(y)
 
-        y = keras.layers.BatchNormalization(axis=axis)(y)
+        #y = keras.layers.BatchNormalization(axis=axis)(y)
         y = shortcut(x, y)
         y = keras.layers.Activation("relu")(y)
 
@@ -78,17 +78,17 @@ def bottleneck(filters, strides=(1, 1), first=False):
         else:
             y = keras.layers.Conv2D(filters, (3, 3), strides=strides, padding="same", **parameters)(x)
 
-        y = keras.layers.BatchNormalization(axis=axis)(y)
+        #y = keras.layers.BatchNormalization(axis=axis)(y)
         y = keras.layers.Activation("relu")(y)
 
         y = keras.layers.Conv2D(filters, (3, 3), padding="same", **parameters)(y)
 
-        y = keras.layers.BatchNormalization(axis=axis)(y)
+        #y = keras.layers.BatchNormalization(axis=axis)(y)
         y = keras.layers.Activation("relu")(y)
 
         y = keras.layers.Conv2D(filters * 4, (1, 1), **parameters)(y)
 
-        y = keras.layers.BatchNormalization(axis=axis)(y)
+        #y = keras.layers.BatchNormalization(axis=axis)(y)
         y = shortcut(x, y)
         y = keras.layers.Activation("relu")(y)
 
@@ -108,7 +108,7 @@ def shortcut(a, b):
         if x > 1 or y > 1 or not a_shape[3] == b_shape[3]:
             a = keras.layers.Conv2D(b_shape[3], (1, 1), strides=(x, y), padding="same", **parameters)(a)
 
-            a = keras.layers.BatchNormalization(axis=3)(a)
+            #a = keras.layers.BatchNormalization(axis=3)(a)
     else:
         x = int(round(a_shape[2] / b_shape[2]))
         y = int(round(a_shape[3] / b_shape[3]))
@@ -116,6 +116,6 @@ def shortcut(a, b):
         if x > 1 or y > 1 or not a_shape[1] == b_shape[1]:
             a = keras.layers.Conv2D(b_shape[1], (1, 1), strides=(x, y), padding="same", **parameters)(a)
 
-            a = keras.layers.BatchNormalization(axis=1)(a)
+            #a = keras.layers.BatchNormalization(axis=1)(a)
 
     return keras.layers.add([a, b])
