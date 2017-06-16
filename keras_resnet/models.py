@@ -43,7 +43,7 @@ class ResNet(keras.models.Model):
             axis = 1
 
         x = keras.layers.Conv2D(64, (7, 7), strides=(2, 2), padding="same")(inputs)
-        x = keras.layers.BatchNormalization(axis=axis)(x)
+        #x = keras.layers.BatchNormalization(axis=axis)(x)
         x = keras.layers.Activation("relu")(x)
         x = keras.layers.MaxPooling2D((3, 3), strides=(2, 2), padding="same")(x)
 
@@ -60,7 +60,7 @@ class ResNet(keras.models.Model):
 
             features *= 2
 
-        x = keras.layers.BatchNormalization(axis=axis)(x)
+        #x = keras.layers.BatchNormalization(axis=axis)(x)
         x = keras.layers.Activation("relu")(x)
 
         shape = keras.backend.int_shape(x)
